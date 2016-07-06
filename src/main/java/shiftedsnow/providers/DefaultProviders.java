@@ -20,7 +20,6 @@ import shiftedsnow.api.EnumSnowType;
 
 public class DefaultProviders {
   public static void addSafeVanillaProviders() {
-
     
     ShiftedSnowApi.addSimpleMapping(Blocks.IRON_BARS, EnumSnowType.MINUS_FULL);
     ShiftedSnowApi.addSimpleMapping(Blocks.SAPLING, EnumSnowType.MINUS_FULL);
@@ -95,10 +94,10 @@ public class DefaultProviders {
       }
       if (state.getMaterial().isSolid() && state.getBoundingBox(world, pos).maxY == 0.75D) {
         return EnumSnowType.MINUS_QUARTER;
-      }
-      if (state.getMaterial().isSolid() && state.getCollisionBoundingBox(world, pos) == Block.NULL_AABB) {
-        return EnumSnowType.MINUS_FULL;
-      }
+      } /*
+         * if (state.getMaterial().isSolid() && state.getCollisionBoundingBox(world, pos) == Block.NULL_AABB) { return
+         * EnumSnowType.MINUS_FULL; }
+         */
       return null;
     });
   }

@@ -47,26 +47,4 @@ public enum EnumSnowType {
       return null;
     }
   }
-  
-  public static EnumSnowType ofBlock(IBlockState block) {
-    if (block == null)
-      return null;
-      
-    if (block.getBlock() == Blocks.SNOW_LAYER)
-      return VANILLA;
-      
-    if (block.getBlock() == ModBlocks.SNOW_OVER_SLAB)
-      return MINUS_HALF;
-      
-    if (block.getBlock() == ModBlocks.SNOW_OVER_TABLE)
-      return MINUS_QUARTER;
-      
-    if (block.getBlock() == ModBlocks.SNOW_OVER_BUSH)
-      return MINUS_FULL;
-    
-    if (block.getBlock() == ModBlocks.SNOW_OVER_STAIRS)
-      return OVER_STAIRS;
-      
-    return null;
-  }
 }

@@ -11,9 +11,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.api.EnumSnowType;
 import shiftedsnow.api.IShiftedSnowBlock;
+import shiftedsnow.api.ShiftedSnowApi;
 
 public class ModEventHandler {
   @SubscribeEvent
@@ -84,18 +84,20 @@ public class ModEventHandler {
       
     IBlockState state = world.getBlockState(pos);
     
-    EnumSnowType currentSnowingType = EnumSnowType.ofBlock(state);
-    
-    if (currentSnowingType == snowingType) {
+    if (state.getBlock() instanceof IShiftedSnowBlock) {
       IShiftedSnowBlock currentSnowBlock = (IShiftedSnowBlock) state.getBlock();
       
-      PropertyInteger heightProperty = currentSnowBlock.getHeightProperty();
+      EnumSnowType currentSnowingType = currentSnowBlock.getSnowType(state);
       
-      if (state.getValue(heightProperty) < currentSnowBlock.getMaxHeight()) {
-        IBlockState newState = state.cycleProperty(heightProperty);
+      if (currentSnowingType == snowingType) { 
+        PropertyInteger heightProperty = currentSnowBlock.getHeightProperty();
         
-        world.setBlockState(pos, newState, 2);
-        return true;
+        if (state.getValue(heightProperty) < currentSnowBlock.getMaxHeight()) {
+          IBlockState newState = state.cycleProperty(heightProperty);
+          
+          world.setBlockState(pos, newState, 2);
+          return true;
+        }
       }
     } else if (world.isAirBlock(pos)) {
       IBlockState snowBlock = snowingType.getSnowBlock();

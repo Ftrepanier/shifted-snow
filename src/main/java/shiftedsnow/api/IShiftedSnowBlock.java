@@ -14,4 +14,6 @@ public interface IShiftedSnowBlock {
   int quantityDropped(IBlockState state, int fortune, Random random);
   boolean isFullCube(IBlockState state);
   boolean isOpaqueCube(IBlockState state);
+  
+  EnumSnowType getSnowType(IBlockState block);
 }

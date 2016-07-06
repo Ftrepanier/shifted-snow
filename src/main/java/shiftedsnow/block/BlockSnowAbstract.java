@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import shiftedsnow.api.ShiftedSnowApi;
+import shiftedsnow.ModBlocks;
 import shiftedsnow.api.EnumSnowType;
 import shiftedsnow.api.IShiftedSnowBlock;
 
@@ -62,13 +64,11 @@ public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlo
     return false;
   }
   
-  
-
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     this.checkAndDropBlock(worldIn, pos, state);
   }
-
+  
   @Override
   public final void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn) {
     this.checkAndDropBlock(worldIn, pos, state);
@@ -118,5 +118,24 @@ public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlo
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
     return worldIn.getBlockState(pos).getValue(HEIGHT_8) == 1;
+  }
+  
+  public EnumSnowType getSnowType(IBlockState block) {
+    if (block == null)
+      return null;
+      
+    if (block.getBlock() == ModBlocks.SNOW_OVER_SLAB)
+      return EnumSnowType.MINUS_HALF;
+      
+    if (block.getBlock() == ModBlocks.SNOW_OVER_TABLE)
+      return EnumSnowType.MINUS_QUARTER;
+      
+    if (block.getBlock() == ModBlocks.SNOW_OVER_BUSH)
+      return EnumSnowType.MINUS_FULL;
+      
+    if (block.getBlock() == ModBlocks.SNOW_OVER_STAIRS)
+      return EnumSnowType.OVER_STAIRS;
+      
+    return null;
   }
 }
