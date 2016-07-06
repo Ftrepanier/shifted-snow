@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import shiftedsnow.api.BetterSnowRegistry;
+import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.api.EnumSnowType;
 
 public class BlockSnowOverStairs extends BlockSnowAbstract {
@@ -25,10 +25,10 @@ public class BlockSnowOverStairs extends BlockSnowAbstract {
 			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 2D / 8D, 1.0D),
 			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 3D / 8D, 1.0D),
 			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 4D / 8D, 1.0D),
-			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 4D / 8D, 1.0D),
-			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 4D / 8D, 1.0D),
-			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 4D / 8D, 1.0D),
-			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 4D / 8D, 1.0D) };
+			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 5D / 8D, 1.0D),
+			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 6D / 8D, 1.0D),
+			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 7D / 8D, 1.0D),
+			new AxisAlignedBB(0.0D, -0.5D, 0.0D, 1.0D, 8D / 8D, 1.0D) };
 
 	public BlockSnowOverStairs() {
 		super();
@@ -106,7 +106,7 @@ public class BlockSnowOverStairs extends BlockSnowAbstract {
 	}
 
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return (BetterSnowRegistry.getSnowingType(worldIn.getBlockState(pos.down()), worldIn, pos.down()) == EnumSnowType.OVER_STAIRS);
+		return (ShiftedSnowApi.getSnowingType(worldIn.getBlockState(pos.down()), worldIn, pos.down()) == EnumSnowType.OVER_STAIRS);
 	}
 
 	@Override

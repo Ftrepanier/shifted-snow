@@ -14,11 +14,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import shiftedsnow.api.BetterSnowRegistry;
+import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.api.EnumSnowType;
-import shiftedsnow.api.IBetterSnowBlock;
+import shiftedsnow.api.IShiftedSnowBlock;
 
-public abstract class BlockSnowAbstract extends Block implements IBetterSnowBlock {
+public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlock {
   public static final PropertyInteger HEIGHT_8 = PropertyInteger.create("height", 1, 8);
   
   public BlockSnowAbstract() {
@@ -101,7 +101,7 @@ public abstract class BlockSnowAbstract extends Block implements IBetterSnowBloc
   }
   
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return (BetterSnowRegistry.getSnowingType(worldIn.getBlockState(pos.down()), worldIn,
+    return (ShiftedSnowApi.getSnowingType(worldIn.getBlockState(pos.down()), worldIn,
         pos.down()) == EnumSnowType.MINUS_FULL);
   }
   

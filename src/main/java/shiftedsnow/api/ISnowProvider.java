@@ -7,5 +7,5 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface ISnowProvider {
-	@Nullable EnumSnowType type(IBlockState state, World world, BlockPos pos);
+	@Nullable EnumSnowType getType(IBlockState state, World world, BlockPos pos);
 }

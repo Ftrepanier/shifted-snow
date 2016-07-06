@@ -7,9 +7,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import shiftedsnow.api.IBetterSnowBlock;
+import shiftedsnow.api.IShiftedSnowBlock;
 
-public class BlockSnowOverBush extends BlockSnowAbstract implements IBetterSnowBlock {
+public class BlockSnowOverBush extends BlockSnowAbstract implements IShiftedSnowBlock {
   protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {
       new AxisAlignedBB(0.0D, -1D, 0.0D, 1.0D, -1D, 1.0D),
       new AxisAlignedBB(0.0D, -1D, 0.0D, 1.0D, -1D + 1D / 8D, 1.0D),

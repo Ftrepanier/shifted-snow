@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public interface IBetterSnowBlock {
+public interface IShiftedSnowBlock {
 	int getMaxHeight();
 	PropertyInteger getHeightProperty();
   boolean isReplaceable(IBlockAccess worldIn, BlockPos pos);

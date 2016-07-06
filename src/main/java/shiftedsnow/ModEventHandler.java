@@ -11,74 +11,73 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import shiftedsnow.api.BetterSnowRegistry;
+import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.api.EnumSnowType;
-import shiftedsnow.api.IBetterSnowBlock;
+import shiftedsnow.api.IShiftedSnowBlock;
 
 public class ModEventHandler {
   @SubscribeEvent
   public void on(BreakEvent e) {
     Block blockAbove1 = e.getWorld().getBlockState(e.getPos().up(2)).getBlock();
-    if (blockAbove1 instanceof IBetterSnowBlock) {
+    if (blockAbove1 instanceof IShiftedSnowBlock) {
+      // There is Shifted-snow block over it, but it can't update as formally it 2 far away.
+      // So we shedult it update, as if it were just at top of it.
+      // As result, it prevents snow from dangling in air/on non-solid surface under it.
       e.getWorld().scheduleBlockUpdate(e.getPos().up(2), blockAbove1, 2, 0);
     }
   }
   
-  @SubscribeEvent(priority = EventPriority.LOW)
-  public void onClickAtSideOfSnowableBlock(RightClickBlock e) {
-    if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
-      return;
-      
-    BlockPos pos = e.getPos().offset(e.getFace()).up();
-    BlockPos posUnder = e.getPos().offset(e.getFace());
-    
-    World world = e.getWorld();
-    
-    handleClick(pos, posUnder, world);
-  }
-  
   @SubscribeEvent(priority = EventPriority.HIGH)
-  public void onClickOnSnowableBlock(RightClickBlock e) {
+  public void handleClickOnSnowable(RightClickBlock e) {
     if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
       return;
       
     BlockPos pos = e.getPos().up();
     BlockPos posUnder = e.getPos();
     
-    World world = e.getWorld();
-    handleClick(pos, posUnder, world);
+    boolean result = handleClick(pos, posUnder, e.getWorld());
+    if (result)
+      e.setCanceled(result);
+  }
+  
+  @SubscribeEvent(priority = EventPriority.LOW)
+  public void handleClickAtSnowableSide(RightClickBlock e) {
+    if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
+      return;
+      
+    BlockPos pos = e.getPos().offset(e.getFace()).up();
+    BlockPos posUnder = e.getPos().offset(e.getFace());
+    
+    boolean result = handleClick(pos, posUnder, e.getWorld());
+    if (result)
+      e.setCanceled(result);
   }
   
   @SubscribeEvent
-  public void onClickUnderSnowableBlock(RightClickBlock e) {
+  public void handleClickUnderSnowable(RightClickBlock e) {
     if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
       return;
       
     BlockPos pos = e.getPos().up(2);
     BlockPos posUnder = e.getPos().up();
     
-    World world = e.getWorld();
-
-    e.setCanceled(handleClick(pos, posUnder, world));
+    boolean result = handleClick(pos, posUnder, e.getWorld());
+    if (result)
+      e.setCanceled(result);
   }
-  
-  @SubscribeEvent
-  public void onClickAtSnowBlock(RightClickBlock e) {
-    if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
-      return;
-      
-    BlockPos pos = e.getPos().up(2);
-    BlockPos posUnder = e.getPos().up();
-    
-    World world = e.getWorld();
-    
-    e.setCanceled(handleClick(pos, posUnder, world));
-  }
+  /*
+   * @SubscribeEvent public void handleClickOnSnow(RightClickBlock e) { if (e.getItemStack() == null ||
+   * e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER)) return;
+   * 
+   * BlockPos pos = e.getPos(); BlockPos posUnder = e.getPos().down();
+   * 
+   * e.setCanceled(handleClick(pos, posUnder, e.getWorld())); }
+   */
   
   private boolean handleClick(BlockPos pos, BlockPos posUnder, World world) {
     IBlockState stateUnder = world.getBlockState(posUnder);
     
-    EnumSnowType snowingType = BetterSnowRegistry.getSnowingType(stateUnder, world, posUnder);
+    EnumSnowType snowingType = ShiftedSnowApi.getSnowingType(stateUnder, world, posUnder);
     
     if (snowingType == null)
       return false;
@@ -88,7 +87,7 @@ public class ModEventHandler {
     EnumSnowType currentSnowingType = EnumSnowType.ofBlock(state);
     
     if (currentSnowingType == snowingType) {
-      IBetterSnowBlock currentSnowBlock = (IBetterSnowBlock) state.getBlock();
+      IShiftedSnowBlock currentSnowBlock = (IShiftedSnowBlock) state.getBlock();
       
       PropertyInteger heightProperty = currentSnowBlock.getHeightProperty();
       

@@ -16,11 +16,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import shiftedsnow.api.BetterSnowRegistry;
+import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.api.EnumSnowType;
-import shiftedsnow.api.IBetterSnowBlock;
+import shiftedsnow.api.IShiftedSnowBlock;
 
-public class BlockSnowOverTable extends Block implements IBetterSnowBlock {
+public class BlockSnowOverTable extends Block implements IShiftedSnowBlock {
 	public static final PropertyInteger HEIGHT_6 = PropertyInteger.create("height", 1, 6);
 	protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {
 			new AxisAlignedBB(0.0D, -0.25D, 0.0D, 1.0D, -0.25D, 1.0D),
@@ -116,7 +116,7 @@ public class BlockSnowOverTable extends Block implements IBetterSnowBlock {
 	}
 
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return (BetterSnowRegistry.getSnowingType(worldIn.getBlockState(pos.down()), worldIn, pos.down()) == EnumSnowType.MINUS_QUARTER);
+		return (ShiftedSnowApi.getSnowingType(worldIn.getBlockState(pos.down()), worldIn, pos.down()) == EnumSnowType.MINUS_QUARTER);
 	}
 
 	@Override
