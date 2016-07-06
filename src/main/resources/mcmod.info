@@ -1,0 +1,16 @@
+[
+{
+  "modid": "shiftedsnow",
+  "name": "Better Snow",
+  "description": "Allows placing snow over fences, slabs and bushes.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Reoseah"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "height=1": { "model": "shiftedsnow:snow_over_slab_2" },
+        "height=2": { "model": "shiftedsnow:snow_over_slab_4" },
+        "height=3": { "model": "shiftedsnow:snow_over_slab_6" },
+        "height=4": { "model": "shiftedsnow:snow_over_slab_8" },
+        "height=5": { "model": "shiftedsnow:snow_over_slab_10" },
+        "height=6": { "model": "shiftedsnow:snow_over_slab_12" },
+        "height=7": { "model": "shiftedsnow:snow_over_slab_14" },
+        "height=8": { "model": "shiftedsnow:snow_over_slab_16" }
+    }
+}

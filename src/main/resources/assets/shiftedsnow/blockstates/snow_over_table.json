@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "height=1": { "model": "shiftedsnow:snow_over_table_2" },
+        "height=2": { "model": "shiftedsnow:snow_over_table_4" },
+        "height=3": { "model": "shiftedsnow:snow_over_table_6" },
+        "height=4": { "model": "shiftedsnow:snow_over_table_8" },
+        "height=5": { "model": "shiftedsnow:snow_over_table_10" },
+        "height=6": { "model": "shiftedsnow:snow_over_table_12" }
+    }
+}
