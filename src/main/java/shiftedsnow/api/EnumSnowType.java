@@ -10,11 +10,7 @@ public enum EnumSnowType {
    */
   VANILLA,
   
-  /**
-   * WIP... World.getBlockState(...) seems to not return actual block state, but always with property "shape" set to
-   * "straight"
-   */
-  OVER_STAIRS,
+  OVER_STAIRS, OVER_WALL,
   
   /**
    * Enchanting table
@@ -43,6 +39,8 @@ public enum EnumSnowType {
       return ModBlocks.SNOW_OVER_BUSH.getDefaultState();
     case OVER_STAIRS:
       return ModBlocks.SNOW_OVER_STAIRS.getDefaultState();
+    case OVER_WALL:
+      return ModBlocks.SNOW_OVER_WALL.getDefaultState();
     default:
       return null;
     }

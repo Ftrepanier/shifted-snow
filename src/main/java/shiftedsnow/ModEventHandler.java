@@ -65,14 +65,19 @@ public class ModEventHandler {
     if (result)
       e.setCanceled(result);
   }
-  /*
-   * @SubscribeEvent public void handleClickOnSnow(RightClickBlock e) { if (e.getItemStack() == null ||
-   * e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER)) return;
-   * 
-   * BlockPos pos = e.getPos(); BlockPos posUnder = e.getPos().down();
-   * 
-   * e.setCanceled(handleClick(pos, posUnder, e.getWorld())); }
-   */
+  
+  @SubscribeEvent
+  public void handleClickOnSnow(RightClickBlock e) {
+    if (e.getItemStack() == null || e.getItemStack().getItem() != Item.getItemFromBlock(Blocks.SNOW_LAYER))
+      return;
+      
+    BlockPos pos = e.getPos();
+    BlockPos posUnder = e.getPos().down();
+    
+    boolean result = handleClick(pos, posUnder, e.getWorld());
+    if (result)
+      e.setCanceled(result);
+  }
   
   private boolean handleClick(BlockPos pos, BlockPos posUnder, World world) {
     IBlockState stateUnder = world.getBlockState(posUnder);
@@ -89,7 +94,7 @@ public class ModEventHandler {
       
       EnumSnowType currentSnowingType = currentSnowBlock.getSnowType(state);
       
-      if (currentSnowingType == snowingType) { 
+      if (currentSnowingType == snowingType) {
         PropertyInteger heightProperty = currentSnowBlock.getHeightProperty();
         
         if (state.getValue(heightProperty) < currentSnowBlock.getMaxHeight()) {

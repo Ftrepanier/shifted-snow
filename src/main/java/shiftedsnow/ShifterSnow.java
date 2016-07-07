@@ -7,7 +7,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import shiftedsnow.providers.DefaultProviders;
+import shiftedsnow.providers.AABBProviders;
+import shiftedsnow.providers.ClassProviders;
 
 @Mod(modid = ShifterSnow.MODID, version = ShifterSnow.VERSION)
 public class ShifterSnow {
@@ -24,16 +25,25 @@ public class ShifterSnow {
     GameRegistry.register(ModBlocks.SNOW_OVER_TABLE, new ResourceLocation("shiftedsnow:snow_over_table"));
     GameRegistry.register(ModBlocks.SNOW_OVER_BUSH, new ResourceLocation("shiftedsnow:snow_over_bush"));
     GameRegistry.register(ModBlocks.SNOW_OVER_STAIRS, new ResourceLocation("shiftedsnow:snow_over_stairs"));
+    GameRegistry.register(ModBlocks.SNOW_OVER_WALL, new ResourceLocation("shiftedsnow:snow_over_wall"));
     
-    
-    if(Config.doClassPrepositions) {
-      DefaultProviders.addClassProviders();
+    if (Config.doClassPrepositions) {
+      if (Config.addStairsSnow)
+        ClassProviders.addStairs();
+      if (Config.addWallSnow)
+        ClassProviders.addWall();
+      if (Config.addSlabSnow)
+        ClassProviders.addSlab();
+      if (Config.addFenceSnow)
+        ClassProviders.addFences();
+      if (Config.addEnchTableSnow)
+        ClassProviders.addEnchTable();
+      if (Config.addBushSnow)
+        ClassProviders.addBush();
     }
-    if(Config.doAABBPrepositions) {
-      DefaultProviders.addAABBProviders();
+    if (Config.doAABBPrepositions) {
+      AABBProviders.addAABBProviders();
     }
-    if(!Config.doAABBPrepositions && !Config.doClassPrepositions) {
-      DefaultProviders.addSafeVanillaProviders();
-    }
+    if (!Config.doAABBPrepositions && !Config.doClassPrepositions) {}
   }
 }

@@ -100,11 +100,6 @@ public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlo
     return (state.getValue(HEIGHT_8));
   }
   
-  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return (ShiftedSnowApi.getSnowingType(worldIn.getBlockState(pos.down()), worldIn,
-        pos.down()) == EnumSnowType.MINUS_FULL);
-  }
-  
   @Override
   public int getMaxHeight() {
     return 8;
@@ -137,5 +132,10 @@ public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlo
       return EnumSnowType.OVER_STAIRS;
       
     return null;
+  }
+  
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return (ShiftedSnowApi.getSnowingType(worldIn.getBlockState(pos.down()), worldIn,
+        pos.down()) == getSnowType(worldIn.getBlockState(pos)));
   }
 }

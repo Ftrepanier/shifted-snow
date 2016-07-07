@@ -22,7 +22,7 @@ public class ShiftedSnowApi {
   }
   
   public static void addSimpleClassMapping(Class<? extends Block> block, EnumSnowType snow) {
-    if (snow != EnumSnowType.MINUS_FULL) {
+    if (snow != EnumSnowType.MINUS_FULL && snow != EnumSnowType.OVER_WALL) {
       SNOW_PROVIDERS.add((state, world, pos) -> {
         return block.isInstance(state.getBlock()) ? snow : null;
       });
@@ -34,7 +34,7 @@ public class ShiftedSnowApi {
   }
   
   public static void addSimpleMapping(Block block, EnumSnowType snow) {
-    if (snow != EnumSnowType.MINUS_FULL) {
+    if (snow != EnumSnowType.MINUS_FULL && snow != EnumSnowType.OVER_WALL) {
       SNOW_PROVIDERS.add((state, world, pos) -> {
         return (block == state.getBlock()) ? snow : null;
       });
