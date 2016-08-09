@@ -2,9 +2,9 @@ shifted-snow
 ==========
 About
 ------
-Small mod for Minecraft 1.9.4 which allows to place snow on stairs, albs and some other stuff 
+Small mod for Minecraft 1.9.4 which allows to place snow on stairs, walls and some other stuff 
 
-It works by making a blocks that can stay on stairs and other things and have models and block-property handling to "mimic" block under. Is uses events to find when player attempts to place snow layer and, if that block is supported, places needed snow on it.
+It works by making a blocks that can stay on stairs and other things and have models and sometimes block-property handling to "mimic" block under. Is uses events to find when player attempts to place snow layer and, if that block is supported, places needed snow on it.
 
 License
 --------
