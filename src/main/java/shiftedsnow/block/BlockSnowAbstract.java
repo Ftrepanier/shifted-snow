@@ -8,17 +8,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import shiftedsnow.api.ShiftedSnowApi;
 import shiftedsnow.ModBlocks;
 import shiftedsnow.api.EnumSnowType;
 import shiftedsnow.api.IShiftedSnowBlock;
+import shiftedsnow.api.ShiftedSnowApi;
 
 public abstract class BlockSnowAbstract extends Block implements IShiftedSnowBlock {
   public static final PropertyInteger HEIGHT_8 = PropertyInteger.create("height", 1, 8);
